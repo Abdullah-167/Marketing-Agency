@@ -1,5 +1,4 @@
 import React from "react";
-import Hero3D from "./Hero";
 import IndustriesWeServe from "./IndustriesWeServe";
 import ThreeDServices from "./ThreeDServices";
 import OurProcess from "./OurProcess";
