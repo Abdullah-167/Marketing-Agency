@@ -10,10 +10,10 @@ import Cta from "../Common/Cta";
 const Index = () => {
   return (
     <div>
-      <HeroSection />
+      {/* <HeroSection /> */}
       <ServiceProcess />
       <Services />
-      <ProjectsFolders />
+      {/* <ProjectsFolders /> */}
       <Philosophy />
       <Clienttrust />
       <Cta />

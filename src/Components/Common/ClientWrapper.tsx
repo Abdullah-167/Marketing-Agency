@@ -17,7 +17,7 @@ export default function ClientWrapper({
   return (
     <div className="min-h-screen flex flex-col bg-black relative overflow-x-hidden">
       {pathname === "/" && <HomeOutro />}
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="flex-grow">{children}</main>
       <Footer />
     </div>

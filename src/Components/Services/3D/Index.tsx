@@ -9,7 +9,7 @@ import Cta from "@/Components/Common/Cta";
 const Modeling = () => {
   return (
     <div>
-      <Hero3D />
+      {/* <Hero3D /> */}
       <ThreeDServices />
       <OurProcess />
       <BeforeAfterShowcase />

@@ -46,7 +46,7 @@ const Cta = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             href="/contact-us"
-            className="group max-w-[260px] mx-auto relative flex justify-between w-full items-center px-8 py-4 text-sm font-semibold text-white hover:text-black rounded-full overflow-hidden transition-all duration-500 bg-transparent border border-white hover:bg-white"
+            className="group max-w-[275px] mx-auto relative flex justify-between w-full items-center px-8 py-4 text-sm font-semibold text-white hover:text-black rounded-full overflow-hidden transition-all duration-500 bg-transparent border border-white hover:bg-white"
           >
             <span className="relative z-10 mr-8">Get In Touch With Us</span>
             <svg

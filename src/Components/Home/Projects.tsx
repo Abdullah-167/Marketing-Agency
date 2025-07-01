@@ -209,7 +209,7 @@ const ProjectShowcase = () => {
           <a
 
             href="/contact-us"
-            className="group max-w-[236px] relative flex justify-between w-full items-center px-8 py-4 text-sm font-semibold text-white hover:text-black rounded-full overflow-hidden transition-all duration-500 bg-transparent border border-white hover:bg-white"
+            className="group max-w-[245px] relative flex justify-between w-full items-center px-8 py-4 text-sm font-semibold text-white hover:text-black rounded-full overflow-hidden transition-all duration-500 bg-transparent border border-white hover:bg-white"
           >
             <span className="relative z-10 mr-8">Start Your Project</span>
             <svg
