@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useAnimation, useInView } from "framer-motion";
+import {  useAnimation, useInView } from "framer-motion";
 import { ShieldCheck, Zap, Clock, BarChart2, Users, Code } from "lucide-react";
 import { useEffect, useRef, useState, ReactElement } from "react";
 

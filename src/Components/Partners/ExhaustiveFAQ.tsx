@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
@@ -218,7 +217,6 @@ export const ComprehensiveFAQ = () => {
                 </div>
               </button>
 
-              <AnimatePresence>
                 {activeIndex === index && (
                   <div
                     className="overflow-hidden"
@@ -228,7 +226,6 @@ export const ComprehensiveFAQ = () => {
                     </div>
                   </div>
                 )}
-              </AnimatePresence>
             </div>
           ))}
         </div>
