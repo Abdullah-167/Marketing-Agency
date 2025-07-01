@@ -3,7 +3,6 @@ import Hero from "./Hero";
 import UIUXServices from "./Services";
 import UIUXProcess from "./UxProcess";
 import UIUXStacks from "./UiUxStacks";
-import Cta from "@/Components/Common/Cta";
 
 const UiUx = () => {
   return (
@@ -12,7 +11,7 @@ const UiUx = () => {
       <UIUXServices />
       <UIUXProcess />
       <UIUXStacks />
-      <Cta />
+      {/* <Cta /> */}
     </div>
   );
 };

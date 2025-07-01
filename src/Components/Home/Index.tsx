@@ -3,7 +3,6 @@ import ServiceProcess from "./ServiceProcess";
 import Services from "./ServicesSection";
 import Philosophy from "./Philosophy";
 import Clienttrust from "./Clienttrust";
-import Cta from "../Common/Cta";
 
 const Index = () => {
   return (
@@ -14,7 +13,7 @@ const Index = () => {
       {/* <ProjectsFolders /> */}
       <Philosophy />
       <Clienttrust />
-      <Cta />
+      {/* <Cta /> */}
     </div>
   );
 };
