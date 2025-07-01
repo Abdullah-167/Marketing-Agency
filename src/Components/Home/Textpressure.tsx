@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 interface TextPressureProps {
   text?: string;
@@ -60,7 +60,6 @@ const TextPressure = ({
     return Math.sqrt(dx * dx + dy * dy);
   };
 
-  // Load font only once
   useEffect(() => {
     const style = document.createElement("style");
     style.textContent = `
@@ -104,11 +103,11 @@ const TextPressure = ({
     };
   }, []);
 
-  const setSize = () => {
+  const setSize = useCallback(() => {
     if (!containerRef.current || !titleRef.current) return;
 
     const { width: containerW, height: containerH } = containerRef.current.getBoundingClientRect();
-    let newFontSize = containerW / (chars.length / 2);
+    const newFontSize = containerW / (chars.length / 2);
     fontSizeRef.current = Math.max(newFontSize, minFontSize);
     scaleYRef.current = 1;
     lineHeightRef.current = 1;
@@ -129,13 +128,13 @@ const TextPressure = ({
     if (titleRef.current) {
       titleRef.current.style.fontSize = `${fontSizeRef.current}px`;
     }
-  };
+  }, [chars.length, minFontSize, scale]);
 
   useEffect(() => {
     setSize();
     window.addEventListener("resize", setSize);
     return () => window.removeEventListener("resize", setSize);
-  }, [scale, text]);
+  }, [setSize]);
 
   useEffect(() => {
     let rafId: number;

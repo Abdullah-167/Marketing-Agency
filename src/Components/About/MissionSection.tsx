@@ -6,6 +6,7 @@ import {
   HeartHandshake,
 } from "lucide-react";
 import { memo } from "react";
+import type { LucideIcon } from "lucide-react";
 
 const values = [
   {
@@ -28,12 +29,17 @@ const values = [
   },
 ];
 
+// Define types
+interface ValueCardProps {
+  Icon: LucideIcon;
+  color: string;
+  title: string;
+  desc: string;
+}
 
-// Memoized Card
-const ValueCard = memo(({ Icon, color, title, desc }: any) => (
-  <div
-    className="bg-[#121212] rounded-2xl p-6 border border-gray-700 hover:border-blue-500 hover:shadow-blue-500/10 transition-all duration-300"
-  >
+// Memoized Card with type safety and display name
+const ValueCard = memo(({ Icon, color, title, desc }: ValueCardProps) => (
+  <div className="bg-[#121212] rounded-2xl p-6 border border-gray-700 hover:border-blue-500 hover:shadow-blue-500/10 transition-all duration-300">
     <div className={`mb-4 text-2xl ${color}`}>
       <Icon className="w-7 h-7" />
     </div>
@@ -41,14 +47,13 @@ const ValueCard = memo(({ Icon, color, title, desc }: any) => (
     <p className="text-gray-400 text-base">{desc}</p>
   </div>
 ));
+ValueCard.displayName = "ValueCard";
 
 const MissionSection = () => {
   return (
     <section className="bg-[#0c0c0c] py-24 px-6 border-t border-gray-800 text-white">
       <div className="max-w-6xl mx-auto text-center mb-16">
-        <h2
-          className="text-4xl md:text-5xl font-bold"
-        >
+        <h2 className="text-4xl md:text-5xl font-bold">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-neutral-200 to-neutral-300/90">
             What Drives Us
           </span>
@@ -59,9 +64,7 @@ const MissionSection = () => {
         </p>
       </div>
 
-      <div
-        className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8"
-      >
+      <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
         {values.map((item, i) => (
           <ValueCard
             key={i}

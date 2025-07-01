@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   MdArchitecture,
   MdMedicalServices,
@@ -24,6 +23,7 @@ import {
   MdOutlineLiveTv,
 } from "react-icons/md";
 import { memo } from "react";
+import type { IconType } from "react-icons";
 
 const iconSize = 36;
 
@@ -54,36 +54,25 @@ const industries = [
   { name: "Broadcast", icon: MdOutlineLiveTv, color: "#0EA5E9" },
 ];
 
-// Variants
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
+// Define prop types
+interface IndustryCardProps {
+  name: string;
+  Icon: IconType;
+  color: string;
+}
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
-
-// Memoized icon component
-const IndustryCard = memo(
-  ({ name, Icon, color }: { name: string; Icon: any; color: string }) => (
-    <div className="flex flex-col items-center bg-[#1f1f1f] border border-gray-800 hover:border-blue-500 rounded-xl min-w-[100px] aspect-square justify-center shadow-md hover:shadow-blue-500/10 transition-all duration-300 hover:scale-105 group">
-      <Icon
-        size={iconSize}
-        className="mb-2 group-hover:scale-110 transition-transform duration-300"
-        style={{ color }}
-      />
-      <p className="text-xs sm:text-sm text-center text-gray-300 px-1">
-        {name}
-      </p>
-    </div>
-  )
-);
+// Memoized component with display name
+const IndustryCard = memo(({ name, Icon, color }: IndustryCardProps) => (
+  <div className="flex flex-col items-center bg-[#1f1f1f] border border-gray-800 hover:border-blue-500 rounded-xl min-w-[100px] aspect-square justify-center shadow-md hover:shadow-blue-500/10 transition-all duration-300 hover:scale-105 group">
+    <Icon
+      size={iconSize}
+      className="mb-2 group-hover:scale-110 transition-transform duration-300"
+      style={{ color }}
+    />
+    <p className="text-xs sm:text-sm text-center text-gray-300 px-1">{name}</p>
+  </div>
+));
+IndustryCard.displayName = "IndustryCard";
 
 const IndustriesWeServe = () => {
   return (
@@ -92,7 +81,6 @@ const IndustriesWeServe = () => {
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12">
           Industries We Cover
         </h2>
-
         <div className="flex flex-wrap justify-center gap-6">
           {industries.map((item, i) => (
             <IndustryCard

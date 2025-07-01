@@ -98,7 +98,7 @@ const Services = () => {
         <div className="grid md:grid-cols-2 gap-8 items-start">
           {/* Left List */}
           <div className="space-y-6">
-            {data.map((item, index) => (
+            {data.map((item) => (
               <div
                 key={item.type}
                 className={`heading-item border-b border-gray-800 pb-6 cursor-pointer ${
