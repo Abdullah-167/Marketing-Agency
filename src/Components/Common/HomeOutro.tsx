@@ -13,17 +13,19 @@ export default function HomeOutro() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] bg-black transition-opacity duration-700 ease-in-out ${
+      className={`fixed inset-0 bg-black flex justify-center items-center z-[9999] ${
         hideOutro ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
       <video
-        src="/BLACKIntroAnimation.webm"
         autoPlay
         muted
         playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover"
-      />
+        className="w-full max-w-[400px] md:max-w-full h-auto object-contain"
+      >
+        <source src="/BLACKIntroAnimation.webm" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
   );
 }
