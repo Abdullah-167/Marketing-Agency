@@ -223,10 +223,12 @@ export const Navbar = () => {
               <Link href={"/"}>
                 <Image
                   src="/logotext.png"
-                  className="max-h-[70px] object-cover"
-                  alt={"Logo"}
+                  alt="Logo"
                   width={150}
                   height={80}
+                  priority
+                  loading="eager"
+                  className="max-h-[70px] object-cover"
                 />
               </Link>
             </div>

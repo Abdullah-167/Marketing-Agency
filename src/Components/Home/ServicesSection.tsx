@@ -1,7 +1,12 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 interface DataItem {
@@ -22,7 +27,7 @@ const data: DataItem[] = [
     type: "UI/UX Design",
     btn: "Explore",
     img: "/Ui_Ux_Image.png",
-    link: "services/ui-ux",
+    link: "/services/ui-ux",
   },
   {
     type: "Digital Marketing",
@@ -54,40 +59,48 @@ const Services = () => {
   const [activeType, setActiveType] = useState<string>(data[0].type);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const section = sectionRef.current;
-    const headings = section?.querySelectorAll(".heading-item");
+    if (!section) return;
 
-    headings?.forEach((heading) => {
+    const headings = section.querySelectorAll<HTMLElement>(".heading-item");
+
+    for (const heading of headings) {
       const rect = heading.getBoundingClientRect();
       if (rect.top >= 100 && rect.bottom <= window.innerHeight - 200) {
-        setActiveType(heading.getAttribute("data-type") || "");
+        const newType = heading.dataset.type;
+        if (newType && newType !== activeType) {
+          setActiveType(newType);
+        }
+        break;
       }
-    });
-  };
+    }
+  }, [activeType]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const onScroll = () => requestAnimationFrame(handleScroll);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [handleScroll]);
+
+  const activeImage = useMemo(() => {
+    return data.find((item) => item.type === activeType)?.img || data[0].img;
+  }, [activeType]);
 
   return (
     <section ref={sectionRef} className="bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:pb-20">
-        <motion.h2
-          className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-300/90 text-5xl sm:text-6xl pb-20"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        {/* Section Heading */}
+        <h2 className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-300/90 text-5xl sm:text-6xl pb-20">
           Explore Our Services
-        </motion.h2>
+        </h2>
 
         <div className="grid md:grid-cols-2 gap-8 items-start">
+          {/* Left List */}
           <div className="space-y-6">
             {data.map((item, index) => (
-              <motion.div
-                key={index}
+              <div
+                key={item.type}
                 className={`heading-item border-b border-gray-800 pb-6 cursor-pointer ${
                   activeType === item.type
                     ? "opacity-100"
@@ -95,10 +108,6 @@ const Services = () => {
                 }`}
                 data-type={item.type}
                 onMouseEnter={() => setActiveType(item.type)}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <Link href={item.link}>
                   <h3
@@ -109,34 +118,23 @@ const Services = () => {
                     {item.type}
                   </h3>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
 
+          {/* Right Image */}
           <div className="sticky top-20 hidden md:block">
             <div className="relative aspect-square w-full rounded-xl overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeType}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.05 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={
-                      data.find((item) => item.type === activeType)?.img ||
-                      data[0].img
-                    }
-                    alt={activeType}
-                    fill
-                    className="object-cover"
-                    quality={100}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                </motion.div>
-              </AnimatePresence>
+              <div key={activeType} className="absolute inset-0">
+                <Image
+                  src={activeImage}
+                  alt={activeType || "Service"}
+                  fill
+                  className="object-cover"
+                  quality={100}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              </div>
             </div>
           </div>
         </div>

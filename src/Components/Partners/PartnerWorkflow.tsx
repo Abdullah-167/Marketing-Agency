@@ -49,12 +49,7 @@ export const PartnerWorkflow = () => {
     <section className="relative bg-[#0c0c0c] py-28 px-6 border-t border-neutral-800">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-neutral-200 to-neutral-300/90">
               How Partnership Works
@@ -64,7 +59,7 @@ export const PartnerWorkflow = () => {
             A streamlined process designed for maximum efficiency and minimal
             friction. Focus on your clients while we handle the execution.
           </p>
-        </motion.div>
+        </div>
 
         {/* Workflow Timeline */}
         <div className="relative">
@@ -74,17 +69,13 @@ export const PartnerWorkflow = () => {
           {/* Steps Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {workflowSteps.map((step, index) => (
-              <motion.div
+              <div
                 key={index}
                 className={`bg-[#121212] rounded-xl p-8 border border-gray-800 hover:border-blue-500 transition-all duration-300 relative ${
                   index % 2 === 0
                     ? "lg:mr-auto lg:pr-16"
                     : "lg:ml-auto lg:pl-16"
                 }`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
               >
                 <div className="flex items-start mb-4">
                   <div className="w-12 h-12 rounded-lg bg-gray-900 flex items-center justify-center mr-4 flex-shrink-0">
@@ -97,23 +88,14 @@ export const PartnerWorkflow = () => {
                     <p className="text-gray-400">{step.desc}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-          className="flex justify-center mt-14"
-        >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative flex justify-between items-center px-8 py-4 text-sm font-semibold text-white hover:text-black rounded-full overflow-hidden transition-all duration-500 bg-transparent border border-white hover:bg-white"
-          >
+        <div className="flex justify-center mt-14">
+          <div className="group relative flex justify-between items-center px-8 py-4 text-sm font-semibold text-white hover:text-black rounded-full overflow-hidden transition-all duration-500 bg-transparent border border-white hover:bg-white">
             <Link href="/contact" className="relative z-10 mr-8">
               Become a Partner
             </Link>
@@ -141,8 +123,8 @@ export const PartnerWorkflow = () => {
               />
             </svg>
             <span className="absolute right-4 w-8 h-8 bg-white rounded-full transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:right-0"></span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

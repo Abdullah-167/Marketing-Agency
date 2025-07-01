@@ -1,6 +1,4 @@
 "use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 const projects = [
@@ -31,36 +29,28 @@ const BeforeAfterShowcase = () => {
     <section className="py-28 px-6 bg-[#0b0b0b] text-white border-t border-gray-800">
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <h2
           className="text-4xl sm:text-5xl font-bold text-center mb-8 leading-tight"
         >
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-neutral-200 to-neutral-300/90">
             Transformation in Every Frame
           </span>
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <p
           className="text-center text-gray-400 max-w-2xl mx-auto mb-16"
         >
           From basic scenes to breathtaking visuals each project shows our
           ability to shape ideas into 3D stories that engage and inspire.
-        </motion.p>
+        </p>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
           {projects.map((project, idx) => (
-            <motion.div
+            <div
               key={idx}
               className="bg-[#141414] border border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-blue-500/10 transition-all duration-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
+
             >
               <div className="p-5 border-b border-gray-800">
                 <h3 className="text-xl font-semibold">{project.title}</h3>
@@ -89,7 +79,7 @@ const BeforeAfterShowcase = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

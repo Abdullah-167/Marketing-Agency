@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Cuboid, Camera, Film, ScanEye, Orbit, Shapes } from "lucide-react";
 
 const threeDServices = [
@@ -41,11 +40,7 @@ const ThreeDServices = () => {
     <section className="bg-[#0b0b0b] py-28 border-t border-[#1f1f1f] relative z-10">
       <div className="max-w-7xl mx-auto px-6">
         {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight text-white">
@@ -57,27 +52,16 @@ const ThreeDServices = () => {
             Not just 3D we craft dimension, depth, and distinction for your
             brand.
           </p>
-        </motion.div>
+        </div>
 
         {/* Services */}
-        <motion.div
+        <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.2 } },
-          }}
         >
           {threeDServices.map((service, index) => (
-            <motion.div
+            <div
               key={index}
               className="backdrop-blur-md bg-white/5 border border-gray-800 rounded-2xl p-6 hover:border-blue-500 hover:shadow-blue-500/20 transition-all duration-300 shadow-md"
-              whileHover={{ y: -6 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/10 mb-4">
                 {service.icon}
@@ -86,9 +70,9 @@ const ThreeDServices = () => {
                 {service.title}
               </h3>
               <p className="text-gray-400 text-sm">{service.desc}</p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

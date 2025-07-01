@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { LayoutGrid, PenTool, MonitorSmartphone, Rocket } from "lucide-react";
 
 const processSteps = [
@@ -31,14 +30,11 @@ const OurProcess = () => {
   return (
     <section className="relative py-28 px-6 bg-[#0d0d0d] text-white overflow-hidden z-10">
       <div className="max-w-6xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <h2
           className="text-4xl md:text-5xl font-bold mb-4"
         >
           The Nexo Approach
-        </motion.h2>
+        </h2>
         <p className="text-gray-400 text-lg max-w-xl mx-auto mb-16">
           Not just a process a proven approach designed to deliver clarity,
           creativity, and conversion.
@@ -46,16 +42,9 @@ const OurProcess = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 relative z-10">
           {processSteps.map((step, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: i * 0.2,
-                duration: 0.6,
-                ease: "easeOut",
-              }}
-              viewport={{ once: true, amount: 0.3 }}
+    
               className="relative group bg-[#131313] border border-gray-800 rounded-2xl p-6 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-2"
             >
               <div className="flex items-center gap-4 mb-4">
@@ -64,7 +53,7 @@ const OurProcess = () => {
               </div>
               <p className="text-gray-400">{step.desc}</p>
               <div className="absolute inset-0 z-[-1] blur-[80px] opacity-20 bg-gradient-to-tr from-blue-500/20 via-pink-500/20 to-purple-500/20 group-hover:opacity-40 transition duration-500 rounded-2xl" />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

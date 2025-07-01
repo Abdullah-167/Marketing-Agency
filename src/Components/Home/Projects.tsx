@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 // ------------------
 // Card Component
@@ -92,28 +91,21 @@ const ProjectShowcase = () => {
         };
   }, [easing]);
 
-  const refs = useMemo<React.RefObject<HTMLDivElement | null>[]>(
+  const refs = useMemo(
     () => projects.map(() => React.createRef<HTMLDivElement>()),
     []
   );
 
-  const order = useRef<number[]>(
-    Array.from({ length: projects.length }, (_, i) => i)
-  );
-
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const intervalRef = useRef<number | null>(null);
+  const order = useRef<number[]>([0, 1, 2, 3]);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const container = useRef<HTMLDivElement | null>(null);
 
-  const triggerSwap = useCallback(() => {
-    if (order.current.length < 2) return;
-
+  const swapCards = useCallback(() => {
     const [front, ...rest] = order.current;
-    const elFront = refs[front].current;
+    const elFront = refs[front]?.current;
     if (!elFront) return;
 
     const tl = gsap.timeline();
-    tlRef.current = tl;
 
     tl.to(elFront, {
       y: "+=500",
@@ -124,7 +116,7 @@ const ProjectShowcase = () => {
     tl.addLabel("promote", `-=${config.durDrop * config.promoteOverlap}`);
 
     rest.forEach((idx, i) => {
-      const el = refs[idx].current;
+      const el = refs[idx]?.current;
       if (!el) return;
       const slot = makeSlot(i, cardDistance, verticalDistance, refs.length);
       tl.set(el, { zIndex: slot.zIndex }, "promote");
@@ -149,18 +141,8 @@ const ProjectShowcase = () => {
     );
 
     tl.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
-    tl.call(
-      () => {
-        if (elFront) {
-          gsap.set(elFront, { zIndex: backSlot.zIndex });
-        }
-      },
-      undefined,
-      "return"
-    );
-
+    tl.set(elFront, { zIndex: backSlot.zIndex }, "return");
     tl.set(elFront, { x: backSlot.x, z: backSlot.z }, "return");
-
     tl.to(
       elFront,
       {
@@ -173,9 +155,8 @@ const ProjectShowcase = () => {
 
     tl.call(() => {
       order.current = [...rest, front];
-      triggerSwap(); // recursive loop
     });
-  }, [refs, config, cardDistance, verticalDistance]);
+  }, [refs, config]);
 
   useEffect(() => {
     const total = refs.length;
@@ -186,30 +167,30 @@ const ProjectShowcase = () => {
         skewAmount
       )
     );
-    triggerSwap();
+
+    const swap = () => swapCards();
+    const timer = setInterval(swap, 3800);
+    intervalRef.current = timer;
 
     const node = container.current;
-    const timeoutId = intervalRef.current;
-    if (!node) return;
-
-    const pause = () => {
-      tlRef.current?.pause();
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-
+    const pause = () => clearInterval(timer);
     const resume = () => {
-      tlRef.current?.play();
+      intervalRef.current = setInterval(swap, 3800);
     };
 
-    node.addEventListener("mouseenter", pause);
-    node.addEventListener("mouseleave", resume);
+    if (node) {
+      node.addEventListener("mouseenter", pause);
+      node.addEventListener("mouseleave", resume);
+    }
 
     return () => {
-      node.removeEventListener("mouseenter", pause);
-      node.removeEventListener("mouseleave", resume);
-      if (timeoutId) clearTimeout(timeoutId);
+      clearInterval(timer);
+      if (node) {
+        node.removeEventListener("mouseenter", pause);
+        node.removeEventListener("mouseleave", resume);
+      }
     };
-  }, [refs, triggerSwap]);
+  }, [refs, swapCards]);
 
   return (
     <section className="relative z-10 sm:border sm:border-white rounded-2xl text-white px-6 py-20 overflow-hidden max-w-[1300px] mx-auto">
@@ -225,9 +206,8 @@ const ProjectShowcase = () => {
             agencies and enterprise companies we craft solutions that are not
             just visually striking, but strategically sound.
           </p>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <a
+
             href="/contact-us"
             className="group max-w-[236px] relative flex justify-between w-full items-center px-8 py-4 text-sm font-semibold text-white hover:text-black rounded-full overflow-hidden transition-all duration-500 bg-transparent border border-white hover:bg-white"
           >
@@ -256,7 +236,7 @@ const ProjectShowcase = () => {
               />
             </svg>
             <span className="absolute right-4 w-8 h-8 bg-[white] rounded-full transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:right-0"></span>
-          </motion.a>
+          </a>
         </div>
 
         {/* Right Side Cards */}
@@ -272,6 +252,10 @@ const ProjectShowcase = () => {
                     src={project.image}
                     alt={project.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, 500px"
+                    placeholder="blur"
+                    blurDataURL="/placeholder.webp"
+                    priority={i === 0}
                     style={{ objectFit: "cover" }}
                   />
                 </div>

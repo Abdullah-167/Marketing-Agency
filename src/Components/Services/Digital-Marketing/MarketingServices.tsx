@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   SearchCheck,
   Share2,
@@ -48,11 +47,7 @@ const DigitalMarketingOverview = () => {
     <section className="bg-[#0a0a0a] py-28 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-6">
         {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold leading-tight">
@@ -64,27 +59,16 @@ const DigitalMarketingOverview = () => {
          {`   Whether it's SEO, paid ads, or social we build campaigns that get
             seen and get results.`}
           </p>
-        </motion.div>
+        </div>
 
         {/* Services Grid */}
-        <motion.div
+        <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.2 } },
-          }}
         >
           {marketingServices.map((service, i) => (
-            <motion.div
+            <div
               key={i}
               className="bg-[#121212] rounded-2xl p-6 border border-gray-700 hover:border-blue-500 transition-all duration-300 shadow-md hover:shadow-blue-500/10"
-              whileHover={{ y: -6 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
             >
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 mb-5">
                 {service.icon}
@@ -95,9 +79,9 @@ const DigitalMarketingOverview = () => {
               <p className="text-gray-400 text-sm leading-relaxed">
                 {service.desc}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

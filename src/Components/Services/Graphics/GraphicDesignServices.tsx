@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   Paintbrush,
   Image as ImageIcon,
@@ -48,10 +47,7 @@ const GraphicDesignServices = () => {
     <section className="relative bg-[#0c0c0c] py-28 px-6 text-white border-t border-gray-800 overflow-hidden">
       <div className="max-w-7xl mx-auto text-center relative z-10">
         {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <h2
           className="text-4xl sm:text-5xl font-bold leading-tight"
         >
           <span className="block">
@@ -60,41 +56,23 @@ const GraphicDesignServices = () => {
             </span>{" "}
             Services
           </span>
-        </motion.h2>
+        </h2>
 
         {/* Subheading */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <p
           className="text-gray-400 text-lg max-w-2xl mx-auto mt-6"
         >
           Scroll-stopping visuals that don’t just look good they communicate, convert, and elevate your brand presence.
-        </motion.p>
+        </p>
 
         {/* Grid */}
-        <motion.div
+        <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.2,
-              },
-            },
-          }}
         >
           {graphicServices.map((service, i) => (
-            <motion.div
+            <div
               key={i}
               className="bg-[#121212] border border-gray-700 hover:border-blue-500 rounded-2xl p-6 text-left shadow-md hover:shadow-blue-500/10 transition-all duration-300"
-              whileHover={{ y: -6 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
             >
               <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mb-4">
                 {service.icon}
@@ -105,9 +83,9 @@ const GraphicDesignServices = () => {
               <p className="text-gray-400 text-sm leading-relaxed">
                 {service.desc}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

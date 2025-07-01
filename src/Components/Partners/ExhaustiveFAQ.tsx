@@ -184,11 +184,7 @@ export const ComprehensiveFAQ = () => {
     <section className="relative bg-[#0a0a0a] py-28 px-6 border-t border-neutral-800">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-4">
@@ -199,17 +195,13 @@ export const ComprehensiveFAQ = () => {
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Everything about working with us and our service capabilities.
           </p>
-        </motion.div>
+        </div>
 
         {/* FAQ List */}
         <div className="space-y-2">
           {comprehensiveFAQs.map((faq, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              viewport={{ once: true }}
               className="border-b border-gray-800"
             >
               <button
@@ -219,31 +211,25 @@ export const ComprehensiveFAQ = () => {
                 <h3 className="text-lg font-medium text-white pr-4">
                   {faq.question}
                 </h3>
-                <motion.div
-                  animate={{ rotate: activeIndex === index ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
+                <div
                   className="flex-shrink-0 mt-1"
                 >
                   <ChevronDown className="w-5 h-5 text-gray-400" />
-                </motion.div>
+                </div>
               </button>
 
               <AnimatePresence>
                 {activeIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  <div
                     className="overflow-hidden"
                   >
                     <div className="pb-6 px-4 text-gray-300">
                       {faq.answer}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
