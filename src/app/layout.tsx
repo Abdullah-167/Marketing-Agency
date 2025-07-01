@@ -1,7 +1,3 @@
-// layout.tsx
-
-"use client";
-
 import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "@/Components/Common/Footer";
