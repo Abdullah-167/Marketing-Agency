@@ -1,5 +1,3 @@
-// /Components/Common/HomeOutro.tsx
-
 "use client";
 import { useEffect, useState } from "react";
 
@@ -8,24 +6,23 @@ export default function HomeOutro() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setHideOutro(true); // Hide after 4 seconds
-    }, 3400);
+      setHideOutro(true); // Hide after 3 seconds
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] bg-black flex items-center justify-center transition-opacity duration-1000 ${
+      className={`fixed inset-0 z-[9999] bg-black transition-opacity duration-700 ease-in-out ${
         hideOutro ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
-      {/* 👇 Replace video or use animated SVG or Lottie */}
       <video
-        src="/BLACKIntroAnimation.mp4" // replace with your file path
+        src="/BLACKIntroAnimation.webm"
         autoPlay
         muted
         playsInline
-        className="w-full h-full object-cover"
+        className="absolute top-0 left-0 w-full h-full object-cover"
       />
     </div>
   );
