@@ -4,7 +4,6 @@
 
 import { usePathname } from "next/navigation";
 import HomeOutro from "./HomeOutro";
-import { Navbar } from "./Navbar";
 import Footer from "./Footer";
 
 export default function ClientWrapper({
